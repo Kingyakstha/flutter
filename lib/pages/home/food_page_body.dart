@@ -2,6 +2,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/utils/colors.dart';
 import 'package:flutter_projects/utils/dimentions.dart';
+import 'package:flutter_projects/widgets/app_column.dart';
 import 'package:flutter_projects/widgets/big_text.dart';
 import 'package:flutter_projects/widgets/icon_text_widget.dart';
 import 'package:flutter_projects/widgets/small_text.dart';
@@ -83,37 +84,82 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ],
         ),
       ),
-      Container(
-        height: 900,
-        // decoration: BoxDecoration(color: Colors.yellow),
-        child: ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: 10,
-            itemBuilder: (context, index) {
-              return Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                      bottom: Dimensions.height10),
-                  //decoration: BoxDecoration(color: Colors.black),
-                  child: Row(
-                    children: [
-                      Container(
-                        //margin: EdgeInsets.only(bottom: Dimensions.height10),
-                        height: Dimensions.height120,
-                        width: Dimensions.width120,
+      ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    bottom: Dimensions.height10),
+                //decoration: BoxDecoration(color: Colors.black),
+                child: Row(
+                  children: [
+                    Container(
+                      //margin: EdgeInsets.only(bottom: Dimensions.height10),
+                      height: Dimensions.height120,
+                      width: Dimensions.width120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white38,
+                          image: DecorationImage(
+                              image: AssetImage("assets/images/meat.jpg"),
+                              fit: BoxFit.cover)),
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: Dimensions.height110,
+                        //width: 250,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.white38,
-                            image: DecorationImage(
-                                image: AssetImage("assets/images/meat.jpg"),
-                                fit: BoxFit.cover)),
+                          borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              bottomRight: Radius.circular(20)),
+                          color: Colors.white,
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: Dimensions.width10,
+                              right: Dimensions.width10,
+                              top: Dimensions.height10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BigText(text: "Nutricious stake"),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              SmallText(text: "With American characteristic"),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconAndTextWidget(
+                                      icon: Icons.circle_sharp,
+                                      text: "Normal",
+                                      iconColor: AppColors.iconColor1),
+                                  IconAndTextWidget(
+                                      icon: Icons.location_on,
+                                      text: "1.7m",
+                                      iconColor: AppColors.mainColor),
+                                  IconAndTextWidget(
+                                      icon: Icons.access_time_rounded,
+                                      text: "32min",
+                                      iconColor: AppColors.iconColor2),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                    ],
-                  ));
-            }),
-      )
+                    ),
+                  ],
+                ));
+          })
     ]);
   }
 
@@ -177,52 +223,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                       offset: Offset(5, 0)),
                 ]),
             child: Container(
-              padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BigText(text: "American Stake"),
-                  SizedBox(height: Dimensions.height10),
-                  Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Wrap(
-                        children: List.generate(
-                            5,
-                            (index) => Icon(Icons.star,
-                                color: AppColors.mainColor, size: 15)),
-                      ),
-                      const SizedBox(width: 10),
-                      SmallText(text: "4.5"),
-                      const SizedBox(width: 10),
-                      SmallText(text: "1666"),
-                      const SizedBox(width: 10),
-                      SmallText(text: "comments"),
-                    ],
-                  ),
-                  SizedBox(
-                    height: Dimensions.height20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconAndTextWidget(
-                          icon: Icons.circle_sharp,
-                          text: "Normal",
-                          iconColor: AppColors.iconColor1),
-                      IconAndTextWidget(
-                          icon: Icons.location_on,
-                          text: "1.7m",
-                          iconColor: AppColors.mainColor),
-                      IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          text: "32min",
-                          iconColor: AppColors.iconColor2),
-                    ],
-                  )
-                ],
-              ),
-            ),
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                child: const AppColumn()),
           ),
         )
       ]),

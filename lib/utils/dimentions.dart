@@ -15,6 +15,7 @@ class Dimensions {
   static double height45 = height5 * 9;
   static double height30 = height10 * 3;
   static double height120 = height10 * 12;
+  static double height110 = height10 * 11;
 
   //430
   static double width10 = screenWidth / 43;
@@ -23,4 +24,6 @@ class Dimensions {
   static double width45 = width5 * 9;
   static double width30 = width10 * 3;
   static double width120 = width10 * 12;
+
+  //list view size
 }
