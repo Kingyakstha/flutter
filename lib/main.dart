@@ -4,7 +4,9 @@ import 'package:flutter_projects/pages/food/popular_food_details.dart';
 import 'package:flutter_projects/pages/food/recommended_food_detail.dart';
 import 'package:flutter_projects/pages/home/food_page_body.dart';
 import 'package:flutter_projects/pages/home/main_food_page.dart';
+import 'package:flutter_projects/route/route_helper.dart';
 import 'package:get/get.dart';
+import 'controllers/recommended_product_controller.dart';
 import 'helper/dependencies.dart' as dep;
 
 // void main() async => {
@@ -30,10 +32,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.find<RecommendedProductController>().getRecommendedProductList();
     Get.find<PopularProductController>().getPopularProductList();
-    return const GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: MainFoodPage() //RecommendedFoodDetail(),
-        );
+
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: const MainFoodPage(), //RecommendedFoodDetail(),
+      initialRoute: RouteHelper.initial,
+      getPages: RouteHelper.routes,
+    );
   }
 }
