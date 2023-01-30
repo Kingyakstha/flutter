@@ -4,6 +4,7 @@ import 'package:flutter_projects/controllers/popular_product_controller.dart';
 import 'package:flutter_projects/controllers/recommended_product_controller.dart';
 import 'package:flutter_projects/models/product_model.dart';
 import 'package:flutter_projects/pages/food/popular_food_details.dart';
+import 'package:flutter_projects/pages/food/recommended_food_detail.dart';
 import 'package:flutter_projects/route/route_helper.dart';
 import 'package:flutter_projects/utils/app_constants.dart';
 import 'package:flutter_projects/utils/colors.dart';
@@ -111,7 +112,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {
-                      Get.toNamed(RouteHelper.getRecommendedFood());
+                      Get.toNamed(RouteHelper.getRecommendedFood(index));
+                      //Get.to(() => RecommendedFoodDetail(pageId: index));
                     },
                     child: Container(
                         margin: EdgeInsets.only(
@@ -141,7 +143,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                               child: Container(
                                 height: Dimensions.height110,
                                 //width: 250,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(20),
                                       bottomRight: Radius.circular(20)),
@@ -164,9 +166,11 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                         height: Dimensions.height10,
                                       ),
                                       SmallText(
-                                          text: recommendedProducts
-                                              .recommendedProductList[index]
-                                              .description!),
+                                        text: recommendedProducts
+                                            .recommendedProductList[index]
+                                            .description!,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
                                       SizedBox(
                                         height: Dimensions.height10,
                                       ),
@@ -234,11 +238,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
       child: Stack(children: [
         GestureDetector(
           onTap: () {
-            try {
-              Get.toNamed(RouteHelper.getPopularFood(index));
-            } catch (e) {
-              print("the exception is $e ");
-            }
+            Get.toNamed(RouteHelper.getPopularFood(index));
+            // Get.to(() => PopularFoodDetail(pageId: index));
           },
           child: Container(
             height: Dimensions.pageViewContainer,
@@ -277,7 +278,10 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                 ]),
             child: Container(
                 padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
-                child: AppColumn(text: popularProduct.name!)),
+                child: AppColumn(
+                  text: popularProduct.name!,
+                  pageId: index,
+                )),
           ),
         )
       ]),

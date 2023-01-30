@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class SmallText extends StatelessWidget {
+  TextOverflow overflow;
   Color color;
   final String text;
   double size;
@@ -10,7 +11,8 @@ class SmallText extends StatelessWidget {
       this.color = const Color(0xFFccc7c5),
       required this.text,
       this.size = 12,
-      this.height = 1.2});
+      this.height = 1.2,
+      this.overflow = TextOverflow.visible});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class SmallText extends StatelessWidget {
         color: color,
         fontSize: size,
         height: height,
+        overflow: overflow,
         //fontFamily: 'Roboto',
       ),
     );

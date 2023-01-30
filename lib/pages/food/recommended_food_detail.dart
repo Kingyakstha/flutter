@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_projects/controllers/recommended_product_controller.dart';
 import 'package:flutter_projects/route/route_helper.dart';
 import 'package:flutter_projects/utils/colors.dart';
 import 'package:flutter_projects/utils/dimentions.dart';
 import 'package:flutter_projects/widgets/app_icon.dart';
 import 'package:flutter_projects/widgets/expandable_text.dart';
 import 'package:get/get.dart';
+import '../../utils/app_constants.dart';
 import '../../widgets/big_text.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({super.key});
+  final int pageId;
+  const RecommendedFoodDetail({super.key, this.pageId = 1});
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -41,19 +46,21 @@ class RecommendedFoodDetail extends StatelessWidget {
                       topLeft: Radius.circular(20),
                       topRight: Radius.circular(20)),
                 ),
-                child:
-                    Center(child: BigText(text: " Sliver app bar", size: 26)),
+                child: Center(child: BigText(text: product.name, size: 26)),
               ),
             ),
             backgroundColor: AppColors.yellowColor,
             pinned: true,
             expandedHeight: 300,
             flexibleSpace: FlexibleSpaceBar(
-                background: Image.asset(
-              "assets/images/meat.jpg",
-              width: double.maxFinite,
-              fit: BoxFit.cover,
-            )),
+              //     background: Image.asset(
+              //   "assets/images/meat.jpg",
+              //   width: double.maxFinite,
+              //   fit: BoxFit.cover,
+              // )
+              background: Image.network(
+                  AppConstants.BASE_URL + "/uploads/" + product.img),
+            ),
           ),
           SliverToBoxAdapter(
             child: Column(
@@ -63,9 +70,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                       left: Dimensions.width20,
                       right: Dimensions.width20,
                       bottom: Dimensions.height10),
-                  child: const ExpandableText(
-                      text:
-                          "Bloom proposed the technique for applications where the amount of source data would require an impractically large amount of memory if error-free hashing techniques were applied. He gave the example of a hyphenation algorithm for a dictionary of 500,000 words, out of which 90% follow simple hyphenation rules, but the remaining 10% require expensive disk accesses to retrieve specific hyphenation patterns. With sufficient core memory, an error-free hash could be used to eliminate all unnecessary disk accesses; on the other hand, with limited core memory, Bloom's technique uses a smaller hash area but still eliminates most unnecessary accesses. For example, a hash area only 15% of the size needed by an ideal error-free hash still eliminates 85% of the disk accesses.Bloom proposed the technique for applications where the amount of source data would require an impractically large amount of memory if error-free hashing techniques were applied. He gave the example of a hyphenation algorithm for a dictionary of 500,000 words, out of which 90% follow simple hyphenation rules, but the remaining 10% require expensive disk accesses to retrieve specific hyphenation patterns. With sufficient core memory, an error-free hash could be used to eliminate all unnecessary disk accesses; on the other hand, with limited core memory, Bloom's technique uses a smaller hash area but still eliminates most unnecessary accesses. For example, a hash area only 15% of the size needed by an ideal error-free hash still eliminates 85% of the disk accesses Bloom proposed the technique for applications where the amount of source data would require an impractically large amount of memory if error-free hashing techniques were applied. He gave the example of a hyphenation algorithm for a dictionary of 500,000 words, out of which 90% follow simple hyphenation rules, but the remaining 10% require expensive disk accesses to retrieve specific hyphenation patterns. With sufficient core memory, an error-free hash could be used to eliminate all unnecessary disk accesses; on the other hand, with limited core memory, Bloom's technique uses a smaller hash area but still eliminates most unnecessary accesses. For example, a hash area only 15% of the size needed by an ideal error-free hash still eliminates 85% of the disk accesses Bloom proposed the technique for applications where the amount of source data would require an impractically large amount of memory if error-free hashing techniques were applied. He gave the example of a hyphenation algorithm for a dictionary of 500,000 words, out of which 90% follow simple hyphenation rules, but the remaining 10% require expensive disk accesses to retrieve specific hyphenation patterns. With sufficient core memory, an error-free hash could be used to eliminate all unnecessary disk accesses; on the other hand, with limited core memory, Bloom's technique uses a smaller hash area but still eliminates most unnecessary accesses. For example, a hash area only 15% of the size needed by an ideal error-free hash still eliminates 85% of the disk accesses."),
+                  child: ExpandableText(text: product.description),
                 )
               ],
             ),
@@ -90,7 +95,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   iconColor: Colors.white,
                 ),
                 BigText(
-                  text: "\$12.88" + " X " + "0",
+                  text: "\$${product.price}" + " X " + "0",
                   color: AppColors.mainBlackColor,
                   size: 26,
                 ),
