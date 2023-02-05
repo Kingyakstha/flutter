@@ -54,7 +54,36 @@ class PopularFoodDetail extends StatelessWidget {
                           Get.toNamed(RouteHelper.getInital());
                         },
                         child: const AppIcon(icon: Icons.arrow_back_ios)),
-                    const AppIcon(icon: Icons.shopping_cart_checkout_outlined)
+                    
+                    GetBuilder<PopularProductController>(builder:(controller){
+                      return Stack(
+                        children: [
+                          const AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                          Get.find<PopularProductController>().totalItems>=1?
+                          Positioned(
+                              right:0,top:0,
+                              child: AppIcon(icon: Icons.circle,size: 20,iconColor: Colors.transparent,background: AppColors.mainColor,)):
+                          Container(),
+                          GetBuilder<PopularProductController>(builder:(controller){
+                            return Stack(
+                              children: [
+                                const AppIcon(icon: Icons.shopping_cart_checkout_outlined),
+                                Get.find<PopularProductController>().totalItems>=1?
+                                Positioned(
+                                    right:3,top:3,
+                                    child: BigText(text: Get.find<PopularProductController>().totalItems.toString(),size: 12,color: Colors.white,)):
+                                Container()
+                              ],
+                            );
+                          })
+
+                        ],
+                      );
+                    })
+                    
+                    
+                    
+
                   ],
                 )),
             //description part
@@ -142,7 +171,7 @@ class PopularFoodDetail extends StatelessWidget {
                           SizedBox(
                             width: Dimensions.width5,
                           ),
-                          BigText(text: popularProduct.quantity.toString()),
+                          BigText(text: popularProduct.cartItems.toString()),
                           SizedBox(
                             width: Dimensions.width5,
                           ),
@@ -158,22 +187,22 @@ class PopularFoodDetail extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        top: Dimensions.height20,
-                        bottom: Dimensions.height20,
-                        right: Dimensions.width20,
-                        left: Dimensions.width20,
-                      ),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: AppColors.mainColor),
-                      child: GestureDetector(
-                          onTap: () {
-                            popularProduct.addItem(product);
-                          },
-                          child:
-                              BigText(text: "\$${product.price} Add to cart")),
+                    GestureDetector(
+                    onTap: (){
+                      popularProduct.addItem(product);
+            },
+                      child: Container(
+                        padding: EdgeInsets.only(
+                          top: Dimensions.height20,
+                          bottom: Dimensions.height20,
+                          right: Dimensions.width20,
+                          left: Dimensions.width20,
+                        ),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.mainColor),
+                        child:
+                                BigText(text: "\$${product.price} Add to cart")),
                     ),
                   ]),
             );
