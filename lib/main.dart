@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_projects/controllers/popular_product_controller.dart';
+import 'package:flutter_projects/pages/cart/cart_page.dart';
 import 'package:flutter_projects/pages/food/popular_food_details.dart';
 import 'package:flutter_projects/pages/food/recommended_food_detail.dart';
 import 'package:flutter_projects/pages/home/food_page_body.dart';
