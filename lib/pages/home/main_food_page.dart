@@ -34,7 +34,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
                       SizedBox(height: Dimensions.height5),
                       Row(children: [
                         SmallText(
-                          text: "Chitwan",
+                          text: "Chitwan n",
                           color: Colors.black54,
                         ),
                         const Icon(Icons.arrow_drop_down)
